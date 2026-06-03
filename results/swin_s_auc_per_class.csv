@@ -1,0 +1,13 @@
+model,class,auc
+swin_s,Dieffenbachia,0.9998182644252612
+swin_s,albahaca,0.9931049298959747
+swin_s,floripondio,0.997335302135393
+swin_s,hierba buena,0.9949182189913676
+swin_s,hierba maestra,0.996880963198546
+swin_s,martanche,0.9924329850068151
+swin_s,oregano,0.9845024988641526
+swin_s,ruda,0.9965061335756474
+swin_s,tlanepa,0.9997319400272604
+swin_s,tomillo,0.997383007723762
+swin_s,violeta,0.9996138119036801
+swin_s,zacate limon,0.9974965924579736

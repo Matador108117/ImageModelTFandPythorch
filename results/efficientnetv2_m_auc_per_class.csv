@@ -1,0 +1,13 @@
+model,class,auc
+efficientnetv2_m,Dieffenbachia,0.49709563834620624
+efficientnetv2_m,albahaca,0.45681252826775215
+efficientnetv2_m,floripondio,0.511608359836438
+efficientnetv2_m,hierba buena,0.4807269422989551
+efficientnetv2_m,hierba maestra,0.4709881871876419
+efficientnetv2_m,martanche,0.5734938664243526
+efficientnetv2_m,oregano,0.4707553384825079
+efficientnetv2_m,ruda,0.47706837800999546
+efficientnetv2_m,tlanepa,0.516617446615175
+efficientnetv2_m,tomillo,0.5126385733757383
+efficientnetv2_m,violeta,0.4979952294411631
+efficientnetv2_m,zacate limon,0.5139606996819628

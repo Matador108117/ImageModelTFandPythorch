@@ -1,0 +1,13 @@
+model,class,auc
+convnext_base,Dieffenbachia,1.0
+convnext_base,albahaca,0.9994934418815017
+convnext_base,floripondio,0.9999863698318946
+convnext_base,hierba buena,0.9983734666060882
+convnext_base,hierba maestra,0.999350295320309
+convnext_base,martanche,0.9998205361199455
+convnext_base,oregano,0.9986915038618809
+convnext_base,ruda,0.9997478418900501
+convnext_base,tlanepa,0.9999909132212631
+convnext_base,tomillo,0.9994706951385735
+convnext_base,violeta,0.9999909132212631
+convnext_base,zacate limon,0.9991890049977283

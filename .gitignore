@@ -1,3 +1,14 @@
 plant_data/
 plantmodel/
-
+dataset/
+dataset1/
+best_model.pth
+plant_classifier.pth
+entrega/
+known_embeddings.npy
+weights/
+plant_classifier.pth
+weights
+*.pth
+weights/
+*.npy
