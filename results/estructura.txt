@@ -1,0 +1,16 @@
+dataset/
+├── train/
+│   ├── albahaca/
+│   ├── Dieffenbachia/
+│   ├── floripondio/
+│   └── ...
+├── val/
+│   ├── albahaca/
+│   ├── Dieffenbachia/
+│   ├── floripondio/
+│   └── ...
+└── test/
+    ├── albahaca/
+    ├── Dieffenbachia/
+    ├── floripondio/
+    └── ...

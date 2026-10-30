@@ -1,5 +1,6 @@
 import os
 import copy
+import random
 import torch
 import timm
 import argparse
@@ -18,13 +19,22 @@ from torch.cuda.amp import autocast, GradScaler
 parser = argparse.ArgumentParser()
 
 parser.add_argument("--data_dir", type=str, required=True)
-parser.add_argument("--epochs", type=int, default=25)
+parser.add_argument("--epochs", type=int, default=20)
 parser.add_argument("--batch_size", type=int, default=8)
 parser.add_argument("--lr", type=float, default=1e-4)
-parser.add_argument("--img_size", type=int, default=384)
+parser.add_argument("--img_size", type=int, default=224)
 parser.add_argument("--output_dir", type=str, default="weights")
 
 args = parser.parse_args()
+
+SEED = 42
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed_all(SEED)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 # =====================================================
 # DEVICE
@@ -33,6 +43,13 @@ args = parser.parse_args()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 print(f"\nDevice: {device}")
+
+# =====================================================
+# NORMALIZACION IMAGENET
+# =====================================================
+
+IMAGENET_MEAN = [0.485, 0.456, 0.406]
+IMAGENET_STD = [0.229, 0.224, 0.225]
 
 # =====================================================
 # TRANSFORMS
@@ -47,12 +64,21 @@ train_transform = transforms.Compose([
         contrast=0.2,
         saturation=0.2
     ),
-    transforms.ToTensor()
+    transforms.ToTensor(),
+    transforms.Normalize(
+        mean=IMAGENET_MEAN,
+        std=IMAGENET_STD
+    )
 ])
 
 val_transform = transforms.Compose([
-    transforms.Resize((args.img_size, args.img_size)),
-    transforms.ToTensor()
+    transforms.Resize(256),
+    transforms.CenterCrop(args.img_size),
+    transforms.ToTensor(),
+    transforms.Normalize(
+        mean=IMAGENET_MEAN,
+        std=IMAGENET_STD
+    )
 ])
 
 # =====================================================

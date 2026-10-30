@@ -1,4 +1,5 @@
 import os
+import random
 import torch
 import timm
 import argparse
@@ -16,13 +17,21 @@ from torch.cuda.amp import autocast, GradScaler
 parser = argparse.ArgumentParser()
 
 parser.add_argument("--data_dir", type=str, required=True)
-parser.add_argument("--epochs", type=int, default=25)
+parser.add_argument("--epochs", type=int, default=20)
 parser.add_argument("--batch_size", type=int, default=8)
 parser.add_argument("--lr", type=float, default=1e-4)
 parser.add_argument("--img_size", type=int, default=224)
 parser.add_argument("--output_dir", type=str, default="weights")
 
 args = parser.parse_args()
+
+SEED = 42
+random.seed(SEED)
+torch.manual_seed(SEED)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed_all(SEED)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 # =====================================================
 # DEVICE

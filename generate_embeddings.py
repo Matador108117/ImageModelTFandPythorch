@@ -15,13 +15,13 @@ from torch.utils.data import DataLoader
 
 TRAIN_DIR = "dataset/train"
 
-MODEL_PATH = "plant_classifier.pth"
+MODEL_PATH = "weights/convnext_base_best.pth"
 
 OUTPUT_PATH = "known_embeddings.npy"
 
 CLASSES_PATH = "classes.json"
 
-MODEL_NAME = "convnext_tiny"
+MODEL_NAME = "convnext_base"
 
 IMG_SIZE = 224
 

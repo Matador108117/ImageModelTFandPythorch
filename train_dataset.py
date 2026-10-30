@@ -1,7 +1,9 @@
 import os
 import copy
 import time
+import random
 import torch
+import numpy as np
 import timm
 
 from tqdm import tqdm
@@ -22,7 +24,7 @@ MODEL_NAME = "convnext_base.fb_in22k_ft_in1k"
 
 IMAGE_SIZE = 224
 
-BATCH_SIZE = 16
+BATCH_SIZE = 8
 
 EPOCHS = 20
 MIN_EPOCHS = 10
@@ -31,8 +33,9 @@ PATIENCE = 5
 
 FREEZE_EPOCHS = 5
 
-LR_HEAD = 1e-3
-LR_BACKBONE = 1e-5
+LEARNING_RATE = 1e-4
+
+SEED = 42
 
 WEIGHT_DECAY = 1e-4
 
@@ -43,6 +46,14 @@ GRAD_CLIP = 1.0
 NUM_WORKERS = 4
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed_all(SEED)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 OUTPUT_DIR = "weights"
 
@@ -263,7 +274,7 @@ def get_optimizer(model, phase="head"):
         groups = [
             {
                 "params": head_params,
-                "lr": LR_HEAD,
+                "lr": LEARNING_RATE,
                 "weight_decay": WEIGHT_DECAY
             }
         ]
@@ -274,19 +285,19 @@ def get_optimizer(model, phase="head"):
 
             {
                 "params": decay_params,
-                "lr": LR_BACKBONE,
+                "lr": LEARNING_RATE,
                 "weight_decay": WEIGHT_DECAY
             },
 
             {
                 "params": no_decay_params,
-                "lr": LR_BACKBONE,
+                "lr": LEARNING_RATE,
                 "weight_decay": 0.0
             },
 
             {
                 "params": head_params,
-                "lr": LR_HEAD,
+                "lr": LEARNING_RATE,
                 "weight_decay": WEIGHT_DECAY
             }
         ]

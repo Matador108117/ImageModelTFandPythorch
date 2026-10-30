@@ -1,13 +1,13 @@
 model,class,auc
-efficientnetv2_m,Dieffenbachia,0.49709563834620624
-efficientnetv2_m,albahaca,0.45681252826775215
-efficientnetv2_m,floripondio,0.511608359836438
-efficientnetv2_m,hierba buena,0.4807269422989551
-efficientnetv2_m,hierba maestra,0.4709881871876419
-efficientnetv2_m,martanche,0.5734938664243526
-efficientnetv2_m,oregano,0.4707553384825079
-efficientnetv2_m,ruda,0.47706837800999546
-efficientnetv2_m,tlanepa,0.516617446615175
-efficientnetv2_m,tomillo,0.5126385733757383
-efficientnetv2_m,violeta,0.4979952294411631
-efficientnetv2_m,zacate limon,0.5139606996819628
+efficientnetv2_m,Dieffenbachia,0.9998387096774194
+efficientnetv2_m,albahaca,0.990359565807327
+efficientnetv2_m,floripondio,0.999563834620627
+efficientnetv2_m,hierba buena,0.9925942753293958
+efficientnetv2_m,hierba maestra,0.9958064516129032
+efficientnetv2_m,martanche,0.9981008632439801
+efficientnetv2_m,oregano,0.9908178100863244
+efficientnetv2_m,ruda,0.9971830985915493
+efficientnetv2_m,tlanepa,0.9994320763289414
+efficientnetv2_m,tomillo,0.9945320308950477
+efficientnetv2_m,violeta,0.9991094956837802
+efficientnetv2_m,zacate limon,0.9988187187641981

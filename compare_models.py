@@ -1,5 +1,4 @@
 import os
-import glob
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -7,17 +6,34 @@ import numpy as np
 
 RESULTS_DIR = "results"
 
-metric_files = glob.glob(
-    os.path.join(
+MODEL_METRICS = {
+    "convnext_base": os.path.join(
         RESULTS_DIR,
-        "*_metrics.csv"
+        "convnext_base_metrics.csv"
+    ),
+    "efficientnetv2_m": os.path.join(
+        RESULTS_DIR,
+        "efficientnetv2_m_metrics.csv"
+    ),
+    "swin_s": os.path.join(
+        RESULTS_DIR,
+        "swin_s_metrics.csv"
     )
-)
+}
 
-if len(metric_files) == 0:
-    raise Exception(
-        "No se encontraron archivos *_metrics.csv"
+missing_files = [
+    file
+    for file in MODEL_METRICS.values()
+    if not os.path.isfile(file)
+]
+
+if missing_files:
+    raise FileNotFoundError(
+        "Faltan archivos de metricas: "
+        + ", ".join(missing_files)
     )
+
+metric_files = list(MODEL_METRICS.values())
 
 dfs = []
 
@@ -31,6 +47,18 @@ comparison_df = pd.concat(
     dfs,
     ignore_index=True
 )
+
+comparison_df = comparison_df[
+    comparison_df["model"].isin(MODEL_METRICS)
+].drop_duplicates(
+    subset=["model"],
+    keep="last"
+).reset_index(drop=True)
+
+if set(comparison_df["model"]) != set(MODEL_METRICS):
+    raise ValueError(
+        "La comparativa debe contener exactamente los tres modelos esperados"
+    )
 
 comparison_csv = os.path.join(
     RESULTS_DIR,
